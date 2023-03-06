@@ -114,7 +114,7 @@ const App = () => {
             />
 
             <main id="main-content">
-                {!Boolean(nostrPublicKey) && (
+                {!nostrPublicKey && (
                     <HeroArea
                         data={content["hero-section"]}
                         onConnectHandler={onConnectHandler}
