@@ -1,6 +1,6 @@
 /* eslint no-extra-boolean-cast: "off" */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
@@ -15,13 +15,7 @@ import BurgerButton from "@ui/burger-button";
 import headerData from "../data/general/header.json";
 import menuData from "../data/general/menu.json";
 
-const Header = ({
-    className,
-    address,
-    nostrPublicKey,
-    onConnectHandler,
-    onDisconnectHandler,
-}) => {
+const Header = ({ className, address, nostrPublicKey, onConnectHandler, onDisconnectHandler }) => {
     const sticky = useSticky();
     const { offcanvas, offcanvasHandler } = useOffcanvas();
 
@@ -39,10 +33,7 @@ const Header = ({
                         <div className="header-left">
                             <Logo logo={headerData.logo} />
                             <div className="mainmenu-wrapper">
-                                <nav
-                                    id="sideNav"
-                                    className="mainmenu-nav d-none d-xl-block"
-                                >
+                                <nav id="sideNav" className="mainmenu-nav d-none d-xl-block">
                                     <MainMenu menu={[]} />
                                 </nav>
                             </div>
@@ -80,21 +71,17 @@ const Header = ({
                     </div>
                 </div>
             </header>
-            <MobileMenu
-                isOpen={offcanvas}
-                onClick={offcanvasHandler}
-                menu={menuData}
-                logo={headerData.logo}
-            />
+            <MobileMenu isOpen={offcanvas} onClick={offcanvasHandler} menu={menuData} logo={headerData.logo} />
         </>
     );
 };
 
 Header.propTypes = {
     className: PropTypes.string,
-    setNostrPublicKey: PropTypes.func,
     nostrPublicKey: PropTypes.string,
     address: PropTypes.string,
+    onConnectHandler: PropTypes.func,
+    onDisconnectHandler: PropTypes.func,
 };
 
 export default Header;

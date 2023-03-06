@@ -16,25 +16,15 @@ const ProductBid = ({ price, utxo }) => {
                     {` ${
                         !utxo.status.confirmed
                             ? "Unconfirmed"
-                            : new Date(
-                                  utxo.status.block_time * 1000
-                              ).toLocaleString()
+                            : new Date(utxo.status.block_time * 1000).toLocaleString()
                     }`}
                 </span>
             </div>
 
-            <button
-                className="btn btn-small"
-                onClick={handleSendModal}
-                disabled={!utxo.status.confirmed}
-            >
+            <button className="btn btn-small" type="button" onClick={handleSendModal} disabled={!utxo.status.confirmed}>
                 Send
             </button>
-            <SendModal
-                show={showSendModal}
-                handleModal={handleSendModal}
-                utxo={utxo}
-            />
+            <SendModal show={showSendModal} handleModal={handleSendModal} utxo={utxo} />
         </div>
     );
 };
@@ -44,6 +34,7 @@ ProductBid.propTypes = {
         amount: PropTypes.number.isRequired,
         currency: PropTypes.string.isRequired,
     }).isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
     utxo: PropTypes.object,
 };
 

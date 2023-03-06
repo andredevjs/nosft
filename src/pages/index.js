@@ -26,8 +26,7 @@ const App = () => {
     const [utxosReady, setUtxosReady] = useState(false);
     const [inscriptionUtxosByUtxo, setInscriptionUtxosByUtxo] = useState({});
     const [nostrAddress, setNostrAddress] = useState();
-    const { nostrPublicKey, onConnectHandler, onDisconnectHandler } =
-        useConnectWallet();
+    const { nostrPublicKey, onConnectHandler, onDisconnectHandler } = useConnectWallet();
 
     useEffect(() => {
         // TODO: Move this to a service and encapulate the logic correctly
@@ -38,9 +37,7 @@ const App = () => {
             const { address } = getAddressInfo(nostrPublicKey);
             setNostrAddress(address);
 
-            const response = await axios.get(
-                `https://mempool.space/api/address/${address}/utxo`
-            );
+            const response = await axios.get(`https://mempool.space/api/address/${address}/utxo`);
             const tempInscriptionsByUtxo = {};
 
             setOwnedUtxos(response.data);
@@ -62,9 +59,7 @@ const App = () => {
                     // console.log(`Checking inscription id ${inscriptionId}`);
                     let res = null;
                     try {
-                        res = await axios.get(
-                            `https://ordinals.com/inscription/${inscriptionId}`
-                        );
+                        res = await axios.get(`https://ordinals.com/inscription/${inscriptionId}`);
                     } catch (err) {
                         console.error(`Error from ordinals.com`);
                     }
@@ -72,9 +67,7 @@ const App = () => {
                         // console.log(`No inscription for ${inscriptionId}`);
                         currentDepth += 1;
                         // get previous vin
-                        const txResp = await axios.get(
-                            `https://mempool.space/api/tx/${currentUtxo.txid}`
-                        );
+                        const txResp = await axios.get(`https://mempool.space/api/tx/${currentUtxo.txid}`);
                         const tx = txResp.data;
                         // console.log(tx);
                         const firstInput = tx.vin[0];
@@ -84,11 +77,8 @@ const App = () => {
                         };
                         continue;
                     }
-                    tempInscriptionsByUtxo[`${utxo.txid}:${utxo.vout}`] =
-                        currentUtxo;
-                    const newInscriptionsByUtxo = deepClone(
-                        tempInscriptionsByUtxo
-                    );
+                    tempInscriptionsByUtxo[`${utxo.txid}:${utxo.vout}`] = currentUtxo;
+                    const newInscriptionsByUtxo = deepClone(tempInscriptionsByUtxo);
 
                     setInscriptionUtxosByUtxo(newInscriptionsByUtxo);
                     setUtxosReady(true);
@@ -114,12 +104,7 @@ const App = () => {
             />
 
             <main id="main-content">
-                {!nostrPublicKey && (
-                    <HeroArea
-                        data={content["hero-section"]}
-                        onConnectHandler={onConnectHandler}
-                    />
-                )}
+                {!nostrPublicKey && <HeroArea data={content["hero-section"]} onConnectHandler={onConnectHandler} />}
 
                 {nostrPublicKey && (
                     <OrdinalsArea

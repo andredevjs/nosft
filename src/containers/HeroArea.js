@@ -60,6 +60,7 @@ const HeroArea = ({ data, onConnectHandler }) => (
 );
 
 HeroArea.propTypes = {
+    onConnectHandler: PropTypes.func,
     data: PropTypes.shape({
         headings: PropTypes.arrayOf(HeadingType),
         texts: PropTypes.arrayOf(TextType),

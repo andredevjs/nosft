@@ -27,24 +27,12 @@ const OrdinalCard = ({
 }) => (
     <div className={clsx("product-style-one", !overlay && "no-overlay")}>
         <div className="card-thumbnail">
-            {image?.src && (
-                <Image
-                    src={image.src}
-                    alt={image?.alt || "Ordinal"}
-                    width={533}
-                    height={533}
-                />
-            )}
+            {image?.src && <Image src={image.src} alt={image?.alt || "Ordinal"} width={533} height={533} />}
         </div>
         <div className="product-share-wrapper">
             <div className="profile-share">
                 {authors?.map((client) => (
-                    <ClientAvatar
-                        key={client.name}
-                        slug={client.slug}
-                        name={client.name}
-                        image={client.image}
-                    />
+                    <ClientAvatar key={client.name} slug={client.slug} name={client.name} image={client.image} />
                 ))}
                 <div className="more-author-text">
                     <span>{shortenStr(utxo.txid)}</span>
