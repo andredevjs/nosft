@@ -40,7 +40,7 @@ export const connectWallet = async () => {
     } else {
         alert(
             "Oops, it looks like you haven't set up your Nostr key yet. Go to your Alby Account Settings and create or import a Nostr key."
-        );
+        ); // eslint-disable-line no-alert
         return undefined;
     }
     return window.nostr.getPublicKey();

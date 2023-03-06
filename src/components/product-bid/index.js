@@ -12,13 +12,15 @@ const ProductBid = ({ price, utxo }) => {
         <div className="bid-react-area">
             <div className="last-bid">
                 {`${price.amount} ${price.currency}`}
-                <span className="minted">{` ${
-                    !utxo.status.confirmed
-                        ? "Unconfirmed"
-                        : new Date(
-                              utxo.status.block_time * 1000
-                          ).toLocaleString()
-                }`}</span>
+                <span className="minted">
+                    {` ${
+                        !utxo.status.confirmed
+                            ? "Unconfirmed"
+                            : new Date(
+                                  utxo.status.block_time * 1000
+                              ).toLocaleString()
+                    }`}
+                </span>
             </div>
 
             <button
