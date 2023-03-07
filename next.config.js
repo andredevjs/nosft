@@ -12,7 +12,6 @@ module.exports = withBundleAnalyzer({
     },
     images: {
         path: "/_next/image",
-        formats: ["image/*"],
         domains: ["ordinals.com", "d2v3k2do8kym1f.cloudfront.net"],
     },
 
