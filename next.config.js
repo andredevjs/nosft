@@ -6,12 +6,12 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
-    distDir: "out",
     reactStrictMode: false,
     sassOptions: {
         includePaths: [path.join(__dirname, "./src/assets/scss")],
     },
     images: {
+        path: "/_next/image",
         domains: ["ordinals.com", "d2v3k2do8kym1f.cloudfront.net"],
     },
 
@@ -20,8 +20,7 @@ module.exports = withBundleAnalyzer({
         (config.experiments = { asyncWebAssembly: true }),
             (config.ignoreWarnings = [
                 {
-                    message:
-                        /(magic-sdk|@walletconnect\/web3-provider|@web3auth\/web3auth)/,
+                    message: /(magic-sdk|@walletconnect\/web3-provider|@web3auth\/web3auth)/,
                 },
             ]);
         return config;

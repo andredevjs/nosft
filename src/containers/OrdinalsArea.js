@@ -18,54 +18,33 @@ const collectionAuthor = [
     },
 ];
 
-const OrdinalsArea = ({
-    className,
-    space,
-    utxosReady,
-    ownedUtxos,
-    inscriptionUtxosByUtxo,
-    address,
-}) => {
+const OrdinalsArea = ({ className, space, utxosReady, ownedUtxos, inscriptionUtxosByUtxo, address }) => {
     const getSrc = (utxo) => {
         console.log(utxo);
         if (utxo.status.confirmed) {
-            return ordinalsImageUrl(
-                inscriptionUtxosByUtxo[`${utxo.txid}:${utxo.vout}`]
-            );
+            return ordinalsImageUrl(inscriptionUtxosByUtxo[`${utxo.txid}:${utxo.vout}`]);
         }
         return cloudfrontUrl(utxo);
     };
 
     return (
-        <div
-            id="your-collection"
-            className={clsx(
-                "rn-product-area",
-                space === 1 && "rn-section-gapTop",
-                className
-            )}
-        >
+        <div id="your-collection" className={clsx("rn-product-area", space === 1 && "rn-section-gapTop", className)}>
             <div className="container">
                 <div className="row mb--50 align-items-center">
                     <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <SectionTitle
-                            className="mb--0"
-                            {...{ title: "Your collection" }}
-                        />
+                        <SectionTitle className="mb--0" {...{ title: "Your collection" }} />
                         <span>
-                            You can safely receive ordinal inscriptions and
-                            regular bitcoin to this{" "}
-                            <a
+                            You can safely receive ordinal inscriptions and regular bitcoin to this{" "}
+                            <button
+                                type="button"
                                 className="copy-address"
                                 onClick={() => {
                                     navigator.clipboard.writeText(address);
-                                    toast(
-                                        "Receive Address copied to clipboard!"
-                                    );
+                                    toast("Receive Address copied to clipboard!");
                                 }}
                             >
                                 address
-                            </a>
+                            </button>
                         </span>
                     </div>
                 </div>
@@ -77,26 +56,15 @@ const OrdinalsArea = ({
                         {ownedUtxos.length > 0 ? (
                             <>
                                 {ownedUtxos
-                                    .filter((utxo) =>
-                                        Boolean(
-                                            inscriptionUtxosByUtxo[
-                                                `${utxo.txid}:${utxo.vout}`
-                                            ]
-                                        )
-                                    )
+                                    .filter((utxo) => Boolean(inscriptionUtxosByUtxo[`${utxo.txid}:${utxo.vout}`]))
                                     .map((utxo) => (
-                                        <div
-                                            key={utxo.txid}
-                                            className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
-                                        >
+                                        <div key={utxo.txid} className="col-5 col-lg-4 col-md-6 col-sm-6 col-12">
                                             <OrdinalCard
                                                 overlay
                                                 slug={utxo.txid}
                                                 minted={utxo.status.confirmed}
                                                 price={{
-                                                    amount: utxo.value.toLocaleString(
-                                                        "en-US"
-                                                    ),
+                                                    amount: utxo.value.toLocaleString("en-US"),
                                                     currency: "Sats",
                                                 }}
                                                 image={{
@@ -114,11 +82,7 @@ const OrdinalsArea = ({
                                 <br />
                                 <br />
                                 Consider minting an{" "}
-                                <a
-                                    href="https://astralbabes.ai"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
+                                <a href="https://astralbabes.ai" target="_blank" rel="noreferrer">
                                     astral babe
                                 </a>
                             </div>
